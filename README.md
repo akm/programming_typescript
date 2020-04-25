@@ -1,6 +1,6 @@
 # Programming TypeScript
 
-## TypeScriptのネット的概要
+## TypeScriptに関係するもの
 
 ### サイト
 
@@ -26,3 +26,7 @@
 - Sheetal Nandi さん。書籍には関係しないが、さんを超える量(行数)のTypeScriptの変更を行っている人 [Twitter](https://twitter.com/sheetalkamat) / [GitHub](https://github.com/sheetalkamat)
 
 アカウントは検索しただけなので間違ってるかも。
+
+### エディタ
+
+- [Emacsの環境構築のログ](./EmacsSetupLog.md)
