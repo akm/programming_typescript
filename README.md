@@ -9,6 +9,7 @@
 - [TypeScript Wikipedia 日本語](https://ja.wikipedia.org/wiki/TypeScript)
 - [Programming TypeScript原著のO'REILLYのサイト](https://www.oreilly.com/library/view/programming-typescript/9781492037644/)
 - [プログラミングTypeScriptのオライリーのサイト](https://www.oreilly.co.jp/books/9784873119045/)
+- [プログラミングTypeScriptのGitHubリポジトリ 正誤表など](https://github.com/oreilly-japan/programming-typescript-ja)
 - [Software Engineering Radio/Episode 384: Boris Cherny on TypeScript](https://www.se-radio.net/2019/10/episode-384-boris-cherny-on-typescript/)
 
 ### 人
