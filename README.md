@@ -14,7 +14,7 @@
 
 ### 人
 
-- Anders Hejlsberg さん。DelphiやC#を作ってTypeScriptにも関係しているすごい人。 [Wikipedia 日本語](https://ja.wikipedia.org/wiki/アンダース・ヘルスバーグ) / [Twitter](https://twitter.com/ahejlsberg) / [GitHub](https://github.com/ahejlsberg)
+- Anders Hejlsberg さん。DelphiやC#を作り、TypeScriptも作ってるすごい人。 [Wikipedia 日本語](https://ja.wikipedia.org/wiki/アンダース・ヘルスバーグ) / [Twitter](https://twitter.com/ahejlsberg) / [GitHub](https://github.com/ahejlsberg)
 - Boris Chery さん。Programming TypScriptの著者 [Twitter](https://twitter.com/bcherny) / [GitHub](https://github.com/bcherny)
 - 今村謙士 さん。プログラミングTypeScriptの監訳 [Twitter](https://twitter.com/kimamula) / [GitHub](https://github.com/kimamula)
 - 原隆文 さん。プログラミングTypeScriptの訳
