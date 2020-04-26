@@ -50,13 +50,11 @@ let reserve: Reserve = (
 
 // 4. callの実装を2番めの引数がstringである関数についてだけ機能するように書き換え
 
-function call<T extends unknown, U extends unknown[], R>(
-    f: (t: T, s: string, ...args: U) => R,
-    t: T,
-    s: string,
-    ...args: U
+function call<T extends [unknown, string, ...unknown[]], R>(
+    f: (...args: T) => R,
+    ...args: T
 ): R {
-    return f(t, s, ...args)
+    return f(...args)
 }
 
 function fill(length: number, value: string): string[] {
