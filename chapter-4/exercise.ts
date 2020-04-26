@@ -74,7 +74,7 @@ function add(a: number, b: number): number {
 
 // 型安全なアサーション関数 is を実装
 
-function is<T>(a: T, ...others: T[]): boolean {
+function is<T>(a: T, ...others: [T, ...T[]]): boolean {
     for (let i of others) {
         if (a != i) {
             return false
@@ -88,3 +88,4 @@ console.log(2, is(true, false)) // false
 console.log(3, is(42, 42)) // true
 // console.log(4, is(10, 'foo')) // エラー
 console.log(5, is([1], [1, 2], [1, 2, 3])) //false
+// console.log(6, is(123)) //エラー
