@@ -65,4 +65,13 @@ function add(a: number, b: number): number {
     return a + b
 }
 
-let d = call(add, 2, 3)
+// let d = call(add, 2, 3)
+
+
+// 型安全なアサーション関数 is を実装
+
+is('string', 'otherstring') // false
+is(true, false) // false
+is(42, 42) // true
+is(10, 'foo') // エラー
+is([1], [1, 2], [1, 2, 3]) //false
