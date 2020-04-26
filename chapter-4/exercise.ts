@@ -70,8 +70,17 @@ function add(a: number, b: number): number {
 
 // 型安全なアサーション関数 is を実装
 
-is('string', 'otherstring') // false
-is(true, false) // false
-is(42, 42) // true
-is(10, 'foo') // エラー
-is([1], [1, 2], [1, 2, 3]) //false
+function is<T>(a: T, ...others: T[]): boolean {
+    for (let i of others) {
+        if (a != i) {
+            return false
+        }
+    }
+    return true
+}
+
+console.log(1, is('string', 'otherstring')) // false
+console.log(2, is(true, false)) // false
+console.log(3, is(42, 42)) // true
+// console.log(4, is(10, 'foo')) // エラー
+console.log(5, is([1], [1, 2], [1, 2, 3])) //false
