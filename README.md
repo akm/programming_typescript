@@ -23,7 +23,7 @@
 - Nick Nance さん。 9.2 型安全なAPIを寄稿した人。 [Twitter](https://twitter.com/nancenick) / [GitHub](https://github.com/nnance)
 - Shyam Seshadri さん。9.1.2 Angular 6/7 を寄稿した人。 [Twitter](https://twitter.com/omniscient1) / [GitHub](https://github.com/shyamseshadri)
 - Daniel Rosenwasser さん。TypeScriptチームの人。原稿を読んで型システムのニュアンスについて指導した人 [Twitter](https://twitter.com/drosenwasser) / [GitHub](https://github.com/DanielRosenwasser)
-- Sheetal Nandi さん。書籍には関係しないが、さんを超える量(行数)のTypeScriptの変更を行っている人 [Twitter](https://twitter.com/sheetalkamat) / [GitHub](https://github.com/sheetalkamat)
+- Sheetal Nandi さん。書籍には関係しないが、ヘルスバーグさんを超える量(行数)のTypeScriptの変更を行っている人 [Twitter](https://twitter.com/sheetalkamat) / [GitHub](https://github.com/sheetalkamat)
 
 アカウントは検索しただけなので間違ってるかも。
 
