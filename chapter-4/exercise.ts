@@ -17,20 +17,26 @@ class Reservation {
 type Reserve = {
     (from: Date, to: Date, destination: string): Reservation
     (from: Date, destination: string): Reservation
+    (destination: string): Reservation
 }
 
 let reserve: Reserve = (
-    from: Date,
-    toOrDestination: Date | string,
+    fromOrDestination: Date | string,
+    toOrDestination?: Date | string,
     destination?: string
 ) => {
-    if (toOrDestination instanceof Date && destination != undefined) {
-        return new Reservation(from, toOrDestination, destination)
-    } else if (typeof toOrDestination === 'string') {
-        return new Reservation(from, from, toOrDestination)
-    } else {
-        // ここには到達しないはずだけど、書かないとコンパイルエラーになる。
-        // どう書いておくべきなんだろう？
-        return new Reservation(from, from, "Error")
+    if (fromOrDestination instanceof Date) {
+        let from = fromOrDestination
+        if (toOrDestination instanceof Date && destination != undefined) {
+            return new Reservation(from, toOrDestination, destination)
+        } else if (typeof toOrDestination === 'string') {
+            return new Reservation(from, from, toOrDestination)
+        }
+        return new Reservation(from, from, "error")
     }
+    let d = new Date()
+    if (typeof fromOrDestination === 'string') {
+        return new Reservation(d, d, fromOrDestination)
+    }
+    return new Reservation(d, d, "error")
 }
