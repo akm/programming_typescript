@@ -40,3 +40,27 @@ let reserve: Reserve = (
     }
     return new Reservation(d, d, "error")
 }
+
+
+// 4. callの実装を2番めの引数がstringである関数についてだけ機能するように書き換え
+
+function call<T extends unknown[], R>(
+    f: (...args: T) => R,
+    ...args: T
+): R {
+    return f(...args)
+}
+
+function fill(length: number, value: string): string[] {
+    return Array.from({ length }, () => value)
+}
+
+let a = call(fill, 10, 'a')
+// let b = call(fill, 10)
+// let c = call(fill, 10, 'a', 'z')
+
+function add(a: number, b: number): number {
+    return a + b
+}
+
+let d = call(add, 2, 3)
