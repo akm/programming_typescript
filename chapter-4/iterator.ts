@@ -17,3 +17,7 @@ let [one, two, ...rest] = numbers
 console.log(one)
 console.log(two)
 console.log(rest)
+
+// *[Symbol.iterator]() {...} という記述はどういうこと？
+// `*` がGeneratorの印で `[Symbol.iteraotr]` が関数名？
+// 他の書き方はあるんだろうか？
