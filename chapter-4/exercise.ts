@@ -25,20 +25,26 @@ let reserve: Reserve = (
     toOrDestination?: Date | string,
     destination?: string
 ) => {
-    if (fromOrDestination instanceof Date) {
-        let from = fromOrDestination
-        if (toOrDestination instanceof Date && destination != undefined) {
-            return new Reservation(from, toOrDestination, destination)
-        } else if (typeof toOrDestination === 'string') {
-            return new Reservation(from, from, toOrDestination)
-        }
-        return new Reservation(from, from, "error")
-    }
-    let d = new Date()
-    if (typeof fromOrDestination === 'string') {
+    if (
+        fromOrDestination instanceof Date &&
+        toOrDestination instanceof Date &&
+        destination !== undefined
+    ) {
+        return new Reservation(fromOrDestination, toOrDestination, destination)
+    } else if (
+        fromOrDestination instanceof Date &&
+        typeof toOrDestination === 'string'
+    ) {
+        return new Reservation(fromOrDestination, fromOrDestination, toOrDestination)
+    } else if (
+        typeof fromOrDestination === 'string'
+    ) {
+        const d = new Date()
         return new Reservation(d, d, fromOrDestination)
+    } else {
+        const d = new Date()
+        return new Reservation(d, d, "error")
     }
-    return new Reservation(d, d, "error")
 }
 
 
