@@ -39,12 +39,23 @@ class Sneaker implements Shoe {
     purpose = 'walking'
 }
 
-let Shoe = {
-    create(type: 'balletFlat' | 'boot' | 'sneaker'): Shoe {
-        switch (type) {
-            case 'balletFlat': return new BalletFlat
-            case 'boot': return new Boot
-            case 'sneaker': return new Sneaker
-        }
+type CreateShoe = {
+    (type: 'balletFlat'): BalletFlat
+    (type: 'boot'): Boot
+    (type: 'sneaker'): Sneaker
+}
+
+let m: CreateShoe = (type: 'balletFlat' | 'boot' | 'sneaker'): BalletFlat | Boot | Sneaker => {
+    switch (type) {
+        case 'balletFlat': return new BalletFlat
+        case 'boot': return new Boot
+        case 'sneaker': return new Sneaker
     }
 }
+
+let Shoe = {
+    create: m
+}
+
+const s = Shoe.create('boot')
+console.log(s)
