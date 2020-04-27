@@ -64,10 +64,10 @@ console.log(s)
 // 4. 型安全なビルダーパターン
 
 class RequestBuilder {
-
-    private data: object | null = null
-    private method: 'get' | 'post' | null = null
-    private url: string | null = null
+    constructor(
+        private method: 'get' | 'post' | null = null,
+        private data: object | null = null,
+    ) { }
 
     setMethod(method: 'get' | 'post'): this {
         this.method = method
@@ -77,23 +77,26 @@ class RequestBuilder {
         this.data = data
         return this
     }
+
     setURL(url: string): RequestSender {
-        this.url = url
-        return new RequestSender(this)
+        return new RequestSender(url, this.method, this.data)
     }
 }
 
-class RequestSender {
+class RequestSender extends RequestBuilder {
     constructor(
-        private builder: RequestBuilder
-    ) { }
+        private url: string,
+        method: 'get' | 'post' | null,
+        data: object | null,
+    ) { super(method, data) }
 
     send() {
-        console.log("sending with ", this.builder)
+        console.log("sending", this)
     }
 }
 
 
 let b = new RequestBuilder
 b.setURL('https://example.com').send() // OK
+b.setURL('https://example.com').setMethod('post').send() // OK
 // b.setMethod('post').setData({ "foo": 1 }).send() // NG
