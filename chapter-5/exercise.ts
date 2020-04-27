@@ -77,16 +77,23 @@ class RequestBuilder {
         this.data = data
         return this
     }
-    setURL(url: string): this {
+    setURL(url: string): RequestSender {
         this.url = url
-        return this
-    }
-
-    send() {
-        // ...
+        return new RequestSender(this)
     }
 }
 
+class RequestSender {
+    constructor(
+        private builder: RequestBuilder
+    ) { }
+
+    send() {
+        console.log("sending with ", this.builder)
+    }
+}
+
+
 let b = new RequestBuilder
 b.setURL('https://example.com').send() // OK
-b.setMethod('post').setData({ "foo": 1 }).send() // NG
+// b.setMethod('post').setData({ "foo": 1 }).send() // NG
