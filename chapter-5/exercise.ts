@@ -59,3 +59,34 @@ let Shoe = {
 
 const s = Shoe.create('boot')
 console.log(s)
+
+
+// 4. 型安全なビルダーパターン
+
+class RequestBuilder {
+
+    private data: object | null = null
+    private method: 'get' | 'post' | null = null
+    private url: string | null = null
+
+    setMethod(method: 'get' | 'post'): this {
+        this.method = method
+        return this
+    }
+    setData(data: object): this {
+        this.data = data
+        return this
+    }
+    setURL(url: string): this {
+        this.url = url
+        return this
+    }
+
+    send() {
+        // ...
+    }
+}
+
+let b = new RequestBuilder
+b.setURL('https://example.com').send() // OK
+b.setMethod('post').setData({ "foo": 1 }).send() // NG
