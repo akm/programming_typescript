@@ -39,26 +39,25 @@ class Sneaker implements Shoe {
     purpose = 'walking'
 }
 
-type CreateShoe = {
-    (type: 'balletFlat'): BalletFlat
-    (type: 'boot'): Boot
-    (type: 'sneaker'): Sneaker
+type ShoeCreator = {
+    create(type: 'balletFlat'): BalletFlat
+    create(type: 'boot'): Boot
+    create(type: 'sneaker'): Sneaker
 }
 
-let m: CreateShoe = (type: 'balletFlat' | 'boot' | 'sneaker'): BalletFlat | Boot | Sneaker => {
-    switch (type) {
-        case 'balletFlat': return new BalletFlat
-        case 'boot': return new Boot
-        case 'sneaker': return new Sneaker
+let Shoe: ShoeCreator = {
+    create: (type: 'balletFlat' | 'boot' | 'sneaker'): BalletFlat | Boot | Sneaker => {
+        switch (type) {
+            case 'balletFlat': return new BalletFlat
+            case 'boot': return new Boot
+            case 'sneaker': return new Sneaker
+        }
     }
 }
 
-let Shoe = {
-    create: m
-}
-
-const s = Shoe.create('boot')
-console.log(s)
+console.log(Shoe.create('balletFlat'))
+console.log(Shoe.create('boot'))
+console.log(Shoe.create('sneaker'))
 
 
 // 4. 型安全なビルダーパターン
