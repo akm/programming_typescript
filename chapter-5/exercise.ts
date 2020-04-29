@@ -125,3 +125,60 @@ b.setData({ "foo": 1 }).setURL('https://example.com').setMethod('post').send() /
 b.setURL('https://example.com').setData({ "foo": 1 }).setMethod('post').send() // OK
 // b.setMethod('post').setData({ "foo": 1 }).send() // NG
 // b.setURL('https://example.com').send() // NG
+
+
+// 4. TypeScriptの機能を使って、それぞれのメソッドの戻り値の型をthisに「追加する」パターンの写経
+
+interface BuildableRequest {
+    data?: object
+    method: 'get' | 'post'
+    url: string
+}
+
+class RequestBuilder2 {
+    data?: object
+    method?: 'get' | 'post'
+    url?: string
+
+    setData(data: object): this & Pick<BuildableRequest, 'data'> {
+        return Object.assign(this, { data })
+    }
+
+    setMethod(method: 'get' | 'post'): this & Pick<BuildableRequest, 'method'> {
+        return Object.assign(this, { method })
+    }
+
+    setURL(url: string): this & Pick<BuildableRequest, 'url'> {
+        return Object.assign(this, { url })
+    }
+
+    send(this: BuildableRequest) {
+        console.log(`${this.method} ${this.url}`, this.data)
+    }
+}
+
+let b2 = new RequestBuilder2                // RequestBuilder2
+let b21 = b2.setMethod('post')              // RequestBuilder2 & Pick<BuildableRequest, 'method'>
+let b22 = b21.setURL('https://example.com') // RequestBuilder2 & Pick<BuildableRequest, 'method'> & Pick<BuildableRequest, 'url'>
+b22.send()
+
+/*
+Pick<BuildableRequest, 'method'> は、  BuildableRequestの methodに関する定義だけ抽出するUtility Type
+https://www.typescriptlang.org/docs/handbook/utility-types.html#picktk
+
+RequestBuilder2 & Pick<BuildableRequest, 'method'> は、 RequestBuilder2のmethod の定義が
+`method?: 'get' | 'post'` から
+`method: 'get' | 'post'` に変更された型になっているらしい。
+*/
+
+
+b2.setMethod('get').setURL('https://example.com').send() // OK
+b2.setMethod('post').setURL('https://example.com').send() // OK
+b2.setMethod('post').setURL('https://example.com').setData({ "foo": 1 }).send() // OK
+b2.setURL('https://example.com').setMethod('get').send() // OK
+b2.setURL('https://example.com').setMethod('post').send() // OK
+b2.setURL('https://example.com').setMethod('post').setData({ "foo": 1 }).send() // OK
+b2.setData({ "foo": 1 }).setURL('https://example.com').setMethod('post').send() // OK
+b2.setURL('https://example.com').setData({ "foo": 1 }).setMethod('post').send() // OK
+// b2.setMethod('post').setData({ "foo": 1 }).send() // NG
+// b2.setURL('https://example.com').send() // NG
