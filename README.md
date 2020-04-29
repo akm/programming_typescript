@@ -1,5 +1,11 @@
 # Programming TypeScript
 
+プログラミングTypeScriptでTypeScriptを勉強する記録です。
+
+4章以降は、書いたコードをPull Requestにして、レビュー時に巻末の解答で答え合わせしています。
+https://github.com/akm/programming_typescript/pulls?q=is%3Apr+
+
+
 ## TypeScriptに関係するもの
 
 ### サイト
@@ -12,7 +18,7 @@
 - [プログラミングTypeScriptのGitHubリポジトリ 正誤表など](https://github.com/oreilly-japan/programming-typescript-ja)
 - [Software Engineering Radio/Episode 384: Boris Cherny on TypeScript](https://www.se-radio.net/2019/10/episode-384-boris-cherny-on-typescript/)
 
-### 人
+### 関係者
 
 - Anders Hejlsberg さん。DelphiやC#を作り、TypeScriptも作ってるすごい人。 [Wikipedia 日本語](https://ja.wikipedia.org/wiki/アンダース・ヘルスバーグ) / [Twitter](https://twitter.com/ahejlsberg) / [GitHub](https://github.com/ahejlsberg)
 - Boris Chery さん。Programming TypScriptの著者 [Twitter](https://twitter.com/bcherny) / [GitHub](https://github.com/bcherny)
@@ -27,6 +33,6 @@
 
 アカウントは検索しただけなので間違ってるかも。
 
-### エディタ
+### 開発環境
 
 - [Emacsの環境構築のログ](./EmacsSetupLog.md)
