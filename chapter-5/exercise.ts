@@ -62,40 +62,66 @@ console.log(Shoe.create('sneaker'))
 
 // 4. 型安全なビルダーパターン
 
-class RequestBuilder {
-    constructor(
-        private method: 'get' | 'post' | null = null,
-        private data: object | null = null,
-    ) { }
+class DataHolder {
+    protected data: object | null = null
 
-    setMethod(method: 'get' | 'post'): this {
-        this.method = method
-        return this
-    }
-    setData(data: object): this {
+    setData(data: object | null): this {
         this.data = data
         return this
     }
+}
 
-    setURL(url: string): RequestSender {
-        return new RequestSender(url, this.method, this.data)
+class RequestBuilder extends DataHolder {
+    setMethod(method: 'get' | 'post'): RequestBuilderWithMethod {
+        return new RequestBuilderWithMethod(method)
+    }
+
+    setURL(url: string): RequestBuilderWithURL {
+        return new RequestBuilderWithURL(url).setData(this.data)
     }
 }
 
-class RequestSender extends RequestBuilder {
+class RequestBuilderWithURL extends DataHolder {
     constructor(
+        private url: string
+    ) { super() }
+
+    setMethod(method: 'get' | 'post'): RequestSender {
+        return new RequestSender(method, this.url).setData(this.data)
+    }
+}
+
+class RequestBuilderWithMethod extends DataHolder {
+    constructor(
+        private method: 'get' | 'post'
+    ) { super() }
+
+    setURL(url: string): RequestSender {
+        return new RequestSender(this.method, url).setData(this.data)
+    }
+}
+
+
+class RequestSender extends DataHolder {
+    constructor(
+        private method: 'get' | 'post',
         private url: string,
-        method: 'get' | 'post' | null,
-        data: object | null,
-    ) { super(method, data) }
+    ) { super() }
 
     send() {
-        console.log("sending", this)
+        console.log(`${this.method} ${this.url}`, this.data)
     }
 }
 
 
 let b = new RequestBuilder
-b.setURL('https://example.com').send() // OK
+b.setMethod('get').setURL('https://example.com').send() // OK
+b.setMethod('post').setURL('https://example.com').send() // OK
+b.setMethod('post').setURL('https://example.com').setData({ "foo": 1 }).send() // OK
+b.setURL('https://example.com').setMethod('get').send() // OK
 b.setURL('https://example.com').setMethod('post').send() // OK
+b.setURL('https://example.com').setMethod('post').setData({ "foo": 1 }).send() // OK
+b.setData({ "foo": 1 }).setURL('https://example.com').setMethod('post').send() // OK
+b.setURL('https://example.com').setData({ "foo": 1 }).setMethod('post').send() // OK
 // b.setMethod('post').setData({ "foo": 1 }).send() // NG
+// b.setURL('https://example.com').send() // NG
