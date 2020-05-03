@@ -22,22 +22,15 @@ type A4 =
     (2 extends (1 | 2) ? never : 2) |
     (4 extends (1 | 2) ? never : 4)
 
+type A41 = (1 extends (2 | 4) ? never : 1) // 1 は (2 | 4) のサブタイプではない => 1
+type A42 = (2 extends (2 | 4) ? never : 2) // 2 は (2 | 4) のサブタイプである   => never
+type A43 = (2 extends (1 | 2) ? never : 2) // 2 は (1 | 2) のサブタイプである   => never
+type A44 = (4 extends (1 | 2) ? never : 4) // 4 は (1 | 2) のサブタイプではない => 4
+
 type A5 =
-    ((1 extends 2 ? never : 1) & (1 extends 4 ? never : 1)) |
-    ((2 extends 2 ? never : 2) & (2 extends 4 ? never : 2)) |
-    ((2 extends 1 ? never : 2) & (2 extends 2 ? never : 2)) |
-    ((4 extends 1 ? never : 4) & (4 extends 2 ? never : 4))
+    (1) |
+    (never) |
+    (never) |
+    (4)
 
-type A6 =
-    ((1) & (1)) |
-    ((never) & (2)) |
-    ((2) & (never)) |
-    ((4) & (4))
-
-type A7 =
-    1 |
-    never |
-    never |
-    4
-
-type A8 = 1 | 4
+type A6 = 1 | 4
