@@ -1,3 +1,6 @@
+class APIError extends Error { }
+class NotFound extends Error { }
+
 class APIWithThrowing {
     constructor(
         private logedInUserID: UserID
@@ -5,7 +8,7 @@ class APIWithThrowing {
 
     getLoggedInUserID(): UserID {
         if (this.logedInUserID == "error") {
-            throw new Error("Failed to get logged in user")
+            throw new APIError("Failed to get logged in user")
         }
         return this.logedInUserID
     }
@@ -17,11 +20,11 @@ class APIWithThrowing {
             case "user3":
                 return ["user3", "user5", "user7"]
             default:
-                throw new Error('Failed to get friend IDs by ' + userID)
+                throw new APIError('Failed to get friend IDs by ' + userID)
         }
     }
 
-    getUserName(userID: UserID): string | null {
+    getUserName(userID: UserID): string {
         switch (userID) {
             case "user1":
             case "user2":
@@ -29,7 +32,7 @@ class APIWithThrowing {
             case "user4":
                 return userID + " name"
             default:
-                throw new Error('Failed to get user name by ' + userID)
+                throw new NotFound('Failed to get user name by ' + userID)
         }
     }
 }
