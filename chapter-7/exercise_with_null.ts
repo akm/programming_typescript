@@ -1,5 +1,3 @@
-type UserID = string
-
 class APIWithNull {
     constructor(
         private logedInUserID: UserID | null
