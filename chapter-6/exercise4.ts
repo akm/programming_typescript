@@ -8,3 +8,9 @@ userId.toUpperCase()
 function fetchUser() {
     userId = globalCache.get('userId')
 }
+
+let globalCache = {
+    get(name: string) {
+        return name
+    }
+}
