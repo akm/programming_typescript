@@ -86,7 +86,7 @@ function callApi4(api: APIWithOption) {
         api.getLoggedInUserID().
             flatMap(api.getFriendIDs).
             flatMap(userIDs =>
-                listOfOptions2OptionOfList(userIDs.map(id => api.getUserName(id)))).
+                listOfOptions2OptionOfList(userIDs.map(api.getUserName))).
             getOrElse("Failed to get friend names")
     )
 }
