@@ -84,7 +84,7 @@ function listOfOptions2OptionOfList<T>(list: Option<T>[]) {
 function callApi4(api: APIWithOption) {
     console.log(
         api.getLoggedInUserID().
-            flatMap(userID => api.getFriendIDs(userID)).
+            flatMap(api.getFriendIDs).
             flatMap(userIDs =>
                 listOfOptions2OptionOfList(userIDs.map(id => api.getUserName(id)))).
             getOrElse("Failed to get friend names")
