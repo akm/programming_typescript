@@ -72,12 +72,23 @@ class APIWithOption {
     }
 }
 
+function listOfOptions2OptionOfList<T>(list: Option<T>[]) {
+    let empty = {}
+    const vals = list.
+        map(opt => opt.getOrElse(empty as T)).
+        filter(val => val !== empty)
+    return (vals.length > 0) ? new Some(vals) : new None
+}
+
+
 function callApi4(api: APIWithOption) {
-    api.getLoggedInUserID().
-        flatMap(userID => api.getFriendIDs(userID)).
-        // flatMap(userIDs => userIDs.map(id => api.getUserName(id))).
-        flatMap(userID => api.getUserName(userID)).
-        getOrElse("Failed to get friend names")
+    console.log(
+        api.getLoggedInUserID().
+            flatMap(userID => api.getFriendIDs(userID)).
+            flatMap(userIDs =>
+                listOfOptions2OptionOfList(userIDs.map(id => api.getUserName(id)))).
+            getOrElse("Failed to get friend names")
+    )
 }
 
 // case 1: 正常
