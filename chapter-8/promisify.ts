@@ -60,10 +60,10 @@ class Promise<T> {
     }
 }
 
-function promisify(f: (arg1: unknown, arg2: unknown, callback: (e: Error | null, data: unknown) => void) => void) {
-    return (arg1: unknown, arg2: unknown) => {
-        return new Promise((resolve: (result: unknown) => void, reject: (error: unknown) => void) => {
-            f(arg1, arg2, (e: Error | null, data: unknown) => {
+function promisify<T, U>(f: (arg: T, callback: (e: Error | null, data: U) => void) => void) {
+    return (arg: T) => {
+        return new Promise((resolve: (result: U) => void, reject: (error: unknown) => void) => {
+            f(arg, (e: Error | null, data: U) => {
                 if (e) {
                     reject(e)
                 } else {
@@ -74,7 +74,6 @@ function promisify(f: (arg1: unknown, arg2: unknown, callback: (e: Error | null,
     }
 }
 
-// promisify の引数fの引数の型が合わないのでエラーになる・・・どうしたらいいんだろう。
 let readFilePromise = promisify(readFile)
 readFilePromise('./promisify.ts')
     .then(result => console.log('success reading file', result.toString()))
