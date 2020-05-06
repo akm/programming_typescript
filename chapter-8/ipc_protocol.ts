@@ -12,9 +12,8 @@ function createIPCProtocol<P extends IPCProtocol>(script: string) {
         (...args: P[K]['in']) =>
             new Promise<P[K]['out']>((resolve, reject) => {
                 let child = fork(script)
-                child.on('message', data =>
-                    console.info('Child process sent a message:', data)
-                )
+                child.on('error', reject)
+                child.on('message', resolve)
                 child.send({ command, args })
             })
 }
