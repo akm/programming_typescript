@@ -19,14 +19,21 @@ console.log("amountDue1", amountDue1)
 console.log("amountDue2", amountDue2)
 
 // 1b. 列挙型に静的メソッドを追加してください
-function Unit(s: string): Unit | undefined {
-    switch (s) {
-        case 'EUR':
-        case 'GBP':
-        case 'JPY':
-        case 'USD':
-            return s
-        default:
-            return undefined
+namespace Unit {
+    export function parse(s: string): Unit | undefined {
+        switch (s) {
+            case 'EUR':
+            case 'GBP':
+            case 'JPY':
+            case 'USD':
+                return s
+            default:
+                return undefined
+        }
     }
 }
+
+let unit1 = Unit.parse('JPY')
+let unit2 = Unit.parse('AUD')
+console.log("unit1", unit1)
+console.log("unit2", unit2)
